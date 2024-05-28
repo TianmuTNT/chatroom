@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyChat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .chat-message {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-buttons">
+                {% if logged_in %}
+                    <span>欢迎，{{ username }}</span>
+                    <button onclick="window.location.href='/logout'">登出</button>
+                {% else %}
+                    <button onclick="window.location.href='/register'">注册</button>
+                    <button onclick="window.location.href='/login'">登录</button>
+                {% endif %}
+            </div>
+            <h2>SkyChat</h2>
+        </div>
+        <div id="chatWindow">
+            {% for message in messages %}
+                <div>
+                    <div><strong>[{{ message.username }}]</strong></div>
+                    <div class="chat-message">{{ message.message }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if logged_in %}
+            <form id="chatForm">
+                <textarea id="message" placeholder="输入消息" required></textarea>
+                <button type="submit">发送</button>
+            </form>
+        {% endif %}
+    </div>
+    <!-- 引入Socket.IO客户端库 -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <!-- 引入main.js -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

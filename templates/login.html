@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyChat-登录</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-button" onclick="window.location.href='/'">返回主界面</button>
+        <h2>登录</h2>
+        <form id="loginForm">
+            <label for="loginUsername">用户名</label>
+            <input type="text" id="loginUsername" name="username" required>
+            <label for="loginPassword">密码</label>
+            <input type="password" id="loginPassword" name="password" required>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+    <!-- 引入Socket.IO客户端库 -->
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <!-- 引入main.js -->
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
